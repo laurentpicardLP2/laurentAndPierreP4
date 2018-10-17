@@ -11,21 +11,35 @@ public class Player {
 
     public Player(int idPlayer) {
         input = new Scanner(System.in);
+        System.out.print("entrez votre nom : [id num : " + idPlayer + "] : ");
+        name = input.nextLine();
         this.idPlayer = idPlayer;
+    }
+
+    public String getName() {
+      return name;
     }
 
     public boolean play(Grid grid) {
       int colNum;
 
-      System.out.print("Choissisez une colonne: ");
+      System.out.print(name + "[" + idPlayer + "]" + ", Choissisez une colonne: ");
       colNum = input.nextInt();
       while(grid.getLevelColumn(colNum) == -1) {
-        System.out.print("Choissisez une autre colonne: ");
+        System.out.print(name + "[" + idPlayer + "]" + ", Choissisez une autre colonne: ");
         colNum = input.nextInt();
       }
       grid.addToken(colNum, idPlayer);
       grid.showGrid();
-      return isVictory(grid);
+      if(isVictory(grid)){
+        System.out.println("Victoire, Bravo " + name);
+        return true;
+      }
+      else if(grid.isFull()) {
+        System.out.println("egalite");
+        return true;
+      }
+      else return false;
     }
 
     public boolean isVictory(Grid grid){

@@ -51,7 +51,7 @@ public class Grid {
 
   public boolean isFull() {
     for(int i=0;i<levelColumns.length; i++)
-      if (levelColumns[i]==-1) return false;
+      if (levelColumns[i]!=-1) return false;
     return true;
   }
 
