@@ -6,4 +6,9 @@ public class Grid {
 
   }
 
+  public void addToken(int numCol){
+
+  }
+
+
 }
