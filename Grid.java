@@ -24,9 +24,9 @@ public class Grid {
   }
 
   public void showGrid(){
-    for(int j=0; j< nbCol; j++){
-      for (int i=0; i< nbRow; i++){
-        System.out.print(grid[j][i] + " ");
+    for(int j=0; j< nbRow; j++){
+      for (int i=0; i< nbCol; i++){
+        System.out.print(grid[i][j] + " ");
       }
       System.out.println();
     }
