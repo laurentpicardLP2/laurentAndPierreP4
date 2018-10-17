@@ -5,6 +5,7 @@ public class Puissance4 {
     int nbCoups = 0;
     //int firstPlayer = Math.floor(Math.random()*2);
     Grid grid = new Grid(7, 6);
+    grid.showGrid();
 
     Player player1 = new Player();
     Player player2 = new Player();
