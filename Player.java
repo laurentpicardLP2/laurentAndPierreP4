@@ -3,7 +3,7 @@ import java.util.Scanner;
  * Player
  */
 public class Player {
-
+    static private int nbJoueurs;
     private String name;
     private int idPlayer;
     private boolean isVictory;
@@ -16,19 +16,41 @@ public class Player {
         this.idPlayer = idPlayer;
     }
 
+    public static int askNbPlayer() {
+      Scanner input1 = new Scanner(System.in);
+      System.out.print("entrez le nombre de joueurs : ");
+      nbJoueurs = input1.nextInt();
+      return nbJoueurs;
+    }
+
     public String getName() {
       return name;
     }
 
     public boolean play(Grid grid) {
-      int colNum;
+      int colNum=0;
+      boolean bExitTry = false;
+      do{
+        try {
+          colNum =askColumn(name + "[" + idPlayer + "]" + ", Choissisez une colonne: ");
+          bExitTry = true;
 
-      System.out.print(name + "[" + idPlayer + "]" + ", Choissisez une colonne: ");
-      colNum = input.nextInt();
-      while(grid.getLevelColumn(colNum) == -1) {
-        System.out.print(name + "[" + idPlayer + "]" + ", Choissisez une autre colonne: ");
-        colNum = input.nextInt();
-      }
+          while((colNum >= grid.getNbCol()) || (grid.getLevelColumn(colNum) == -1)) {
+            colNum = askColumn(name + "[" + idPlayer + "]" + ", Choissisez une autre colonne: ");
+            bExitTry = true;
+            if(colNum>=grid.getNbCol()) {
+                bExitTry = false;
+            }
+          }
+        }
+        catch(NumberFormatException e){
+          System.out.print("Vous devez saisir un entier, so ");
+          bExitTry = false;
+        }
+      } while(bExitTry == false);
+      System.out.println("colNum2 = " + colNum);
+      System.out.println("bExitTry = " + bExitTry);
+
       grid.addToken(colNum, idPlayer);
       grid.showGrid();
       if(isVictory(grid)){
@@ -40,6 +62,13 @@ public class Player {
         return true;
       }
       else return false;
+    }
+
+    private int askColumn(String msg) throws NumberFormatException {
+      String saisie;
+      System.out.print(msg);
+      saisie = input.nextLine();
+      return Integer.parseInt(saisie);
     }
 
     public boolean isVictory(Grid grid){
