@@ -3,7 +3,7 @@ public class Grid {
   //public static final int NB_ROWS = 6;
   private int nbCol, nbRow;
   private int[] levelColumns;
-  private int[][] grid;
+  public int[][] grid;
 
   public Grid(int nbCol, int nbRow){
       this.nbCol = nbCol;
@@ -13,6 +13,14 @@ public class Grid {
       for(int i=0; i< levelColumns.length; i++)
         levelColumns[i] = nbRow - 1;
       initGrid();
+  }
+
+  public int getNbCol() {
+    return nbCol;
+  }
+
+  public int getNbRow() {
+    return nbRow;
   }
 
   public int getLevelColumn(int nbCol) {
@@ -39,6 +47,12 @@ public class Grid {
 
   public void addToken(int numCol, int idPlayer){
       grid[numCol][levelColumns[numCol]--] = idPlayer;
+  }
+
+  public boolean isFull() {
+    for(int i=0;i<levelColumns.length; i++)
+      if (levelColumns[i]==-1) return false;
+    return true;
   }
 
 

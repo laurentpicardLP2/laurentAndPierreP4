@@ -10,9 +10,20 @@ public class Puissance4 {
     Player player1 = new Player(1);
     Player player2 = new Player(2);
 
-    int i=-1;
-    while(i++<20){
-      player1.play(grid);
+    while(true){
+      if(nbCoups%2==0){
+        if(player2.play(grid)) {
+          System.out.println("Victoire !!!");
+          break;
+        }
+      }
+      else{
+        if(player1.play(grid)) {
+          System.out.println("Victoire !!!");
+          break;
+        }
+      }
+      nbCoups++;
     }
 
 

@@ -14,7 +14,7 @@ public class Player {
         this.idPlayer = idPlayer;
     }
 
-    public void play(Grid grid) {
+    public boolean play(Grid grid) {
       int colNum;
 
       System.out.print("Choissisez une colonne: ");
@@ -24,7 +24,52 @@ public class Player {
         colNum = input.nextInt();
       }
       grid.addToken(colNum, idPlayer);
-
       grid.showGrid();
+      return isVictory(grid);
     }
+
+    public boolean isVictory(Grid grid){
+      /* verif victory ligne */
+      for(int j=0; j<grid.getNbRow(); j++){
+        for(int i=0; i< grid.getNbCol()-3;i++)
+          if(grid.grid[i][j] == idPlayer && grid.grid[i+1][j] == idPlayer && grid.grid[i+2][j] == idPlayer && grid.grid[i+3][j] == idPlayer) {
+            return true;
+          }
+      }
+
+      /* verif victory colonne */
+      for(int i=0; i<grid.getNbCol(); i++){
+        for(int j=0; j< grid.getNbRow()-3;j++)
+          if(grid.grid[i][j] == idPlayer && grid.grid[i][j+1] == idPlayer && grid.grid[i][j+2] == idPlayer && grid.grid[i][j+3] == idPlayer) {
+            return true;
+          }
+
+        }
+
+        /* verif victory daigonnale 1 */
+        for(int j=grid.getNbRow()-1; j> 3; j--){
+          for (int i=0; i< grid.getNbCol()-3; i++){
+            if(grid.grid[i][j] == idPlayer && grid.grid[i+1][j-1] == idPlayer && grid.grid[i+2][j-2] == idPlayer && grid.grid[i+3][j-3] == idPlayer) {
+              return true;
+            }
+          }
+        }
+
+
+        /* verif victory daigonnale 2 */
+        for(int j=grid.getNbRow()-1; j> 3; j--){
+          for (int i=grid.getNbCol()-1; i> 3; i--){
+            if(grid.grid[i][j] == idPlayer && grid.grid[i-1][j-1] == idPlayer && grid.grid[i-2][j-2] == idPlayer && grid.grid[i-3][j-3] == idPlayer) {
+              return true;
+            }
+          }
+        }
+
+
+      return false;
+    }
+
+    //for(int i=0;i<grid.length; i++)
+    //if (grid[i]>=0) return false;
+
 }
