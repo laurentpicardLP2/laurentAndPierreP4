@@ -11,8 +11,12 @@ public class Grid {
       levelColumns = new int[nbCol];
       grid = new int[nbCol][nbRow];
       for(int i=0; i< levelColumns.length; i++)
-        levelColumns[i] = 0;
+        levelColumns[i] = nbRow - 1;
       initGrid();
+  }
+
+  public int getLevelColumn(int nbCol) {
+    return levelColumns[nbCol];
   }
 
   private void initGrid() {
@@ -33,8 +37,8 @@ public class Grid {
 
   }
 
-  public void addToken(int numCol){
-
+  public void addToken(int numCol, int idPlayer){
+      grid[numCol][levelColumns[numCol]--] = idPlayer;
   }
 
 
