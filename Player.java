@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 /**
  * Player
  */
@@ -17,102 +18,102 @@ public class Player {
     }
 
     public static int askNbPlayer() {
-      Scanner input1 = new Scanner(System.in);
-      System.out.print("entrez le nombre de joueurs : ");
-      nbJoueurs = input1.nextInt();
-      return nbJoueurs;
+        Scanner input1 = new Scanner(System.in);
+        System.out.print("entrez le nombre de joueurs : ");
+        nbJoueurs = input1.nextInt();
+        return nbJoueurs;
     }
 
     public String getName() {
-      return name;
+        return name;
     }
 
     public boolean play(Grid grid) {
-      int colNum=0;
-      boolean bExitTry = false;
-      do{
-        try {
-          colNum =askColumn(name + "[" + idPlayer + "]" + ", Choissisez une colonne: ");
-          bExitTry = true;
+        int colNum = 0;
+        boolean bExitTry = false;
+        do {
+            try {
+                colNum = askColumn(name + "[" + idPlayer + "]" + ", Choissisez une colonne: ");
+                bExitTry = true;
 
-          while((colNum >= grid.getNbCol()) || (grid.getLevelColumn(colNum) == -1)) {
-            colNum = askColumn(name + "[" + idPlayer + "]" + ", Choissisez une autre colonne: ");
-            bExitTry = true;
-            if(colNum>=grid.getNbCol()) {
+                while ((colNum >= grid.getNbCol()) || (grid.getLevelColumn(colNum) == -1)) {
+                    colNum = askColumn(name + "[" + idPlayer + "]" + ", Choissisez une autre colonne: ");
+                    bExitTry = true;
+                    if (colNum >= grid.getNbCol()) {
+                        bExitTry = false;
+                    }
+                }
+            } catch (NumberFormatException e) {
+                System.out.print("Vous devez saisir un entier, so ");
                 bExitTry = false;
             }
-          }
-        }
-        catch(NumberFormatException e){
-          System.out.print("Vous devez saisir un entier, so ");
-          bExitTry = false;
-        }
-      } while(bExitTry == false);
-      System.out.println("colNum2 = " + colNum);
-      System.out.println("bExitTry = " + bExitTry);
+        } while (bExitTry == false);
+        System.out.println("colNum2 = " + colNum);
+        System.out.println("bExitTry = " + bExitTry);
 
-      grid.addToken(colNum, idPlayer);
-      grid.showGrid();
-      if(isVictory(grid)){
-        System.out.println("Victoire, Bravo " + name);
-        return true;
-      }
-      else if(grid.isFull()) {
-        System.out.println("egalite");
-        return true;
-      }
-      else return false;
+        grid.addToken(colNum, idPlayer);
+        grid.showGrid();
+        if (isVictory(grid)) {
+            System.out.println("Victoire, Bravo " + name);
+            return true;
+        } else if (grid.isFull()) {
+            System.out.println("egalite");
+            return true;
+        } else
+            return false;
     }
 
     private int askColumn(String msg) throws NumberFormatException {
-      String saisie;
-      System.out.print(msg);
-      saisie = input.nextLine();
-      return Integer.parseInt(saisie);
+        String saisie;
+        System.out.print(msg);
+        saisie = input.nextLine();
+        return Integer.parseInt(saisie);
     }
 
-    public boolean isVictory(Grid grid){
-      /* verif victory ligne */
-      for(int j=0; j<grid.getNbRow(); j++){
-        for(int i=0; i< grid.getNbCol()-3;i++)
-          if(grid.grid[i][j] == idPlayer && grid.grid[i+1][j] == idPlayer && grid.grid[i+2][j] == idPlayer && grid.grid[i+3][j] == idPlayer) {
-            return true;
-          }
-      }
+    public boolean isVictory(Grid grid) {
+        /* verif victory ligne */
+        for (int j = 0; j < grid.getNbRow(); j++) {
+            for (int i = 0; i < grid.getNbCol() - 3; i++)
+                if (grid.grid[i][j] == idPlayer && grid.grid[i + 1][j] == idPlayer && grid.grid[i + 2][j] == idPlayer
+                        && grid.grid[i + 3][j] == idPlayer) {
+                    return true;
+                }
+        }
 
-      /* verif victory colonne */
-      for(int i=0; i<grid.getNbCol(); i++){
-        for(int j=0; j< grid.getNbRow()-3;j++)
-          if(grid.grid[i][j] == idPlayer && grid.grid[i][j+1] == idPlayer && grid.grid[i][j+2] == idPlayer && grid.grid[i][j+3] == idPlayer) {
-            return true;
-          }
+        /* verif victory colonne */
+        for (int i = 0; i < grid.getNbCol(); i++) {
+            for (int j = 0; j < grid.getNbRow() - 3; j++)
+                if (grid.grid[i][j] == idPlayer && grid.grid[i][j + 1] == idPlayer && grid.grid[i][j + 2] == idPlayer
+                        && grid.grid[i][j + 3] == idPlayer) {
+                    return true;
+                }
 
         }
 
         /* verif victory daigonnale 1 */
-        for(int j=grid.getNbRow()-1; j> 3; j--){
-          for (int i=0; i< grid.getNbCol()-3; i++){
-            if(grid.grid[i][j] == idPlayer && grid.grid[i+1][j-1] == idPlayer && grid.grid[i+2][j-2] == idPlayer && grid.grid[i+3][j-3] == idPlayer) {
-              return true;
+        for (int j = grid.getNbRow() - 1; j > 3; j--) {
+            for (int i = 0; i < grid.getNbCol() - 3; i++) {
+                if (grid.grid[i][j] == idPlayer && grid.grid[i + 1][j - 1] == idPlayer
+                        && grid.grid[i + 2][j - 2] == idPlayer && grid.grid[i + 3][j - 3] == idPlayer) {
+                    return true;
+                }
             }
-          }
         }
-
 
         /* verif victory daigonnale 2 */
-        for(int j=grid.getNbRow()-1; j> 3; j--){
-          for (int i=grid.getNbCol()-1; i> 3; i--){
-            if(grid.grid[i][j] == idPlayer && grid.grid[i-1][j-1] == idPlayer && grid.grid[i-2][j-2] == idPlayer && grid.grid[i-3][j-3] == idPlayer) {
-              return true;
+        for (int j = grid.getNbRow() - 1; j > 3; j--) {
+            for (int i = grid.getNbCol() - 1; i > 3; i--) {
+                if (grid.grid[i][j] == idPlayer && grid.grid[i - 1][j - 1] == idPlayer
+                        && grid.grid[i - 2][j - 2] == idPlayer && grid.grid[i - 3][j - 3] == idPlayer) {
+                    return true;
+                }
             }
-          }
         }
 
-
-      return false;
+        return false;
     }
 
-    //for(int i=0;i<grid.length; i++)
-    //if (grid[i]>=0) return false;
+    // for(int i=0;i<grid.length; i++)
+    // if (grid[i]>=0) return false;
 
 }

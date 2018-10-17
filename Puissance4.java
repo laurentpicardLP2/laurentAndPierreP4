@@ -1,21 +1,20 @@
 public class Puissance4 {
 
-
-  public static void main(String[] args){
+  public static void main(String[] args) {
     int nbCoups = 0;
 
     Grid grid = new Grid(7, 6);
     int nbPlayer = Player.askNbPlayer();
     Player[] players = new Player[nbPlayer];
-    for(int i= 0; i < nbPlayer; i++) {
-      players[i] = new Player(i+1);
+    for (int i = 0; i < nbPlayer; i++) {
+      players[i] = new Player(i + 1);
     }
-    //int firstPlayer = Math.floor(Math.random()*2);
+    // int firstPlayer = Math.floor(Math.random()*2);
 
     while (true) {
-      for(int i= 0; i < nbPlayer; i++) {
-        if(nbCoups%nbPlayer==i){
-          if(players[i].play(grid)) {
+      for (int i = 0; i < nbPlayer; i++) {
+        if (nbCoups % nbPlayer == i) {
+          if (players[i].play(grid)) {
             break;
           }
         }
@@ -23,21 +22,14 @@ public class Puissance4 {
       nbCoups++;
     }
 
-    /*while(true){
-      if(nbCoups%3==0){
-        if(player3.play(grid)) break;
-      }
-      else if(nbCoups%3==1) {
-        if(player2.play(grid)) break;
-
-      }
-      else {
-        if(player1.play(grid)) break;
-      }
-      nbCoups++;
-
-    }*/
+    /*
+     * while(true){ if(nbCoups%3==0){ if(player3.play(grid)) break; } else
+     * if(nbCoups%3==1) { if(player2.play(grid)) break;
+     * 
+     * } else { if(player1.play(grid)) break; } nbCoups++;
+     * 
+     * }
+     */
   }
-
 
 }
