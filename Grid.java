@@ -44,7 +44,6 @@ public class Grid {
     	  if (i==0)
     		  System.out.print(" ");
     	  System.out.print(Puissance4.dicoToken.get(Integer.valueOf(grid[i][j])) + " || ");
-
       }
     	  System.out.println();
     }
