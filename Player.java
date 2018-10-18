@@ -57,8 +57,7 @@ public class Player {
                 bExitTry = false;
             }
         } while (bExitTry == false);
-        System.out.println("colNum2 = " + colNum);
-        System.out.println("bExitTry = " + bExitTry);
+        
 
         grid.addToken(colNum, idPlayer);
         grid.showGrid();
