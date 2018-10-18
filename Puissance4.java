@@ -9,6 +9,7 @@ public static HashMap<Integer, String> dicoToken;
     int nbPlayer = Player.askNbPlayer();
     Player[] players = new Player[nbPlayer];
     dicoToken = new HashMap<Integer, String>();
+    dicoToken.put(0, " ");
     
     for (int i = 0; i < nbPlayer; i++) {
       players[i] = new Player(i + 1);

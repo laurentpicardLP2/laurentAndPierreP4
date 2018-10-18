@@ -41,24 +41,12 @@ public class Grid {
 	System.out.println();
     for (int j = 0; j < nbRow; j++) {
       for (int i = 0; i < nbCol; i++) {
-    	  if (i==0) {
+    	  if (i==0) 
     		  System.out.print(" ");
-    	  }
-    	  for(Integer key: Puissance4.dicoToken.keySet()) {
-    		  if(key.intValue() == grid[i][j]) {
-    			  System.out.print(Puissance4.dicoToken.get(key) + " || ");
-    			  bFilled = true;
-    			  break;
-    		  }
-    	  }
+    	  System.out.print(Puissance4.dicoToken.get(Integer.valueOf(grid[i][j])) + " || ");
     	  
-    	  
-    	  if(bFilled == false) {
-    		  System.out.print("  || ");
-    	  }
-    	  bFilled = false;
       }
-      System.out.println();
+    	  System.out.println();
     }
     System.out.println("__________________________________");
     System.out.println(" 0    1    2    3    4    5    6 ");
