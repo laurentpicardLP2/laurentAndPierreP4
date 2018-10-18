@@ -36,9 +36,21 @@ public class Grid {
   }
 
   public void showGrid() {
+	boolean  bFilled = false;
     for (int j = 0; j < nbRow; j++) {
       for (int i = 0; i < nbCol; i++) {
-        System.out.print(grid[i][j] + " ");
+    	  
+    	  for(Integer key: Puissance4.dicoToken.keySet()) {
+    		  if(key.intValue() == grid[i][j]) {
+    			  System.out.print(Puissance4.dicoToken.get(key) + " ");
+    			  bFilled = true;
+    			  break;
+    		  }
+    	  }
+    	  if(bFilled == false) {
+    		  System.out.print("  ");
+    	  }
+    	  bFilled = false;
       }
       System.out.println();
     }

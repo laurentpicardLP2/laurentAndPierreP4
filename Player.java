@@ -9,12 +9,21 @@ public class Player {
     private int idPlayer;
     private boolean isVictory;
     Scanner input;
+    private String token;
 
     public Player(int idPlayer) {
         input = new Scanner(System.in);
         System.out.print("entrez votre nom : [id num : " + idPlayer + "] : ");
         name = input.nextLine();
         this.idPlayer = idPlayer;
+        token = initToken();
+        Puissance4.dicoToken.put(idPlayer, token);
+    }
+    
+    private String initToken() {
+    	Scanner input1 = new Scanner(System.in);
+    	System.out.print("choisissez un symbole pour votre jeton : ");
+    	return input1.nextLine();
     }
 
     public static int askNbPlayer() {
