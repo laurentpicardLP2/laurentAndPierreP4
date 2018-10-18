@@ -15,7 +15,7 @@ public class Puissance4 {
       for (int i = 0; i < nbPlayer; i++) {
         if (nbCoups % nbPlayer == i) {
           if (players[i].play(grid)) {
-            break;
+            System.exit(0);
           }
         }
       }

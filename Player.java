@@ -72,8 +72,8 @@ public class Player {
 
     public boolean isVictory(Grid grid) {
         /* verif victory ligne */
-        for (int j = 0; j < grid.getNbRow(); j++) {
-            for (int i = 0; i < grid.getNbCol() - 3; i++)
+        for (int i = 0; i < grid.getNbCol() - 3; i++)
+        	for (int j = 0; j < grid.getNbRow(); j++) {
                 if (grid.grid[i][j] == idPlayer && grid.grid[i + 1][j] == idPlayer && grid.grid[i + 2][j] == idPlayer
                         && grid.grid[i + 3][j] == idPlayer) {
                     return true;
@@ -90,9 +90,9 @@ public class Player {
 
         }
 
-        /* verif victory daigonnale 1 */
-        for (int j = grid.getNbRow() - 1; j > 3; j--) {
-            for (int i = 0; i < grid.getNbCol() - 3; i++) {
+        /* verif victory diagonnale 1 */
+           for (int i = 0; i < grid.getNbCol() - 3; i++) {
+               for (int j = grid.getNbRow() - 1; j > 3; j--) {
                 if (grid.grid[i][j] == idPlayer && grid.grid[i + 1][j - 1] == idPlayer
                         && grid.grid[i + 2][j - 2] == idPlayer && grid.grid[i + 3][j - 3] == idPlayer) {
                     return true;
@@ -101,8 +101,9 @@ public class Player {
         }
 
         /* verif victory daigonnale 2 */
-        for (int j = grid.getNbRow() - 1; j > 3; j--) {
-            for (int i = grid.getNbCol() - 1; i > 3; i--) {
+        for (int i = grid.getNbCol() - 1; i > 3; i--) {
+        	for (int j = grid.getNbRow() - 1; j > 3; j--) {
+            
                 if (grid.grid[i][j] == idPlayer && grid.grid[i - 1][j - 1] == idPlayer
                         && grid.grid[i - 2][j - 2] == idPlayer && grid.grid[i - 3][j - 3] == idPlayer) {
                     return true;
