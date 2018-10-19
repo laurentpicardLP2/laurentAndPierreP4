@@ -10,8 +10,6 @@ public class Grid {
     this.nbRow = nbRow;
     levelColumns = new int[nbCol];
     grid = new int[nbCol][nbRow];
-    for (int i = 0; i < levelColumns.length; i++)
-      levelColumns[i] = nbRow - 1;
     initGrid();
   }
 
@@ -28,11 +26,13 @@ public class Grid {
   }
 
   private void initGrid() {
-    for (int j = 0; j < nbCol; j++) {
-      for (int i = 0; i < nbRow; i++) {
-        grid[j][i] = 0;
-      }
-    }
+	  for (int i = 0; i < levelColumns.length; i++)
+	      levelColumns[i] = nbRow-1;    
+	  for (int j = 0; j < nbCol; j++) {
+	      for (int i = 0; i < nbRow; i++) {
+	        grid[j][i] = 0;
+	      }
+	  }
   }
 
   public void showGrid() {
