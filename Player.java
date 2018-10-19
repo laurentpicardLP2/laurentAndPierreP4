@@ -7,7 +7,6 @@ public class Player {
     static private int nbJoueurs;
     private String name;
     private int idPlayer;
-    private boolean isVictory;
     Scanner input;
     private String token;
 
@@ -22,7 +21,8 @@ public class Player {
     
     private String initToken() {
     	Scanner input1 = new Scanner(System.in);
-    	System.out.print("choisissez un symbole pour votre jeton : ");
+        System.out.print("choisissez un symbole pour votre jeton : ");
+        input1.close();
     	return input1.nextLine();
     }
 
@@ -30,6 +30,7 @@ public class Player {
         Scanner input1 = new Scanner(System.in);
         System.out.print("entrez le nombre de joueurs : ");
         nbJoueurs = input1.nextInt();
+        input1.close();
         return nbJoueurs;
     }
 

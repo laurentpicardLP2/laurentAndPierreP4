@@ -1,13 +1,9 @@
-import static org.junit.Assert.assertEquals;
-
 import java.util.Scanner;
-
-import org.junit.Test;
 
 /**
  * Player
  */
-public class Player {
+public class PlayerTest {
     static private int nbJoueurs;
     private String name;
     private int idPlayer;
@@ -15,7 +11,7 @@ public class Player {
     Scanner input;
  
     
-    public Player() {
+    public PlayerTest() {
     	idPlayer = 1;
     }
     
@@ -23,7 +19,7 @@ public class Player {
     	return idPlayer;
     }
 
-    public Player(int idPlayer) {
+    public PlayerTest(int idPlayer) {
         input = new Scanner(System.in);
         System.out.print("entrez votre nom : [id num : " + idPlayer + "] : ");
         name = input.nextLine();
@@ -44,7 +40,7 @@ public class Player {
         return name;
     }
 
-    public boolean play(Grid grid) {
+    public boolean play(GridTest grid) {
         int colNum = 0;
         boolean bExitTry = false;
         do {
@@ -161,7 +157,7 @@ public class Player {
         return Integer.parseInt(saisie);
     }
 
-    public boolean isVictory(Grid grid) {
+    public boolean isVictory(GridTest grid) {
         /* verif victory ligne */
         for (int j = 0; j < grid.getNbRow(); j++) {
             for (int i = 0; i < grid.getNbCol() - 3; i++)

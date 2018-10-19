@@ -1,4 +1,4 @@
-public class Grid {
+public class GridTest {
   // public static final int NB_COLUMNS = 7;
   // public static final int NB_ROWS = 6;
   private int nbCol, nbRow;
@@ -6,7 +6,7 @@ public class Grid {
   public int[][] grid;
   
 
-  public Grid(int nbCol, int nbRow) {
+  public GridTest(int nbCol, int nbRow) {
     this.nbCol = nbCol;
     this.nbRow = nbRow;
     levelColumns = new int[nbCol];
