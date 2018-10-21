@@ -16,15 +16,11 @@ public static HashMap<Integer, String> dicoToken;
     }
     // int firstPlayer = Math.floor(Math.random()*2);
 
-    while (true) {
-      for (int i = 0; i < nbPlayer; i++) {
-        if (nbCoups % nbPlayer == i) {
-          if (players[i].play(grid)) {
-            System.exit(0);
-          }
-        }
-      }
+    int playerNum=0;
+    grid.showGrid();
+    while (!players[playerNum].play(grid)) {
       nbCoups++;
+      playerNum=nbCoups%nbPlayer;
     }
 
     /*

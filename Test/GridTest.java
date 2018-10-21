@@ -6,14 +6,16 @@ public class GridTest {
   public int[][] grid;
   
 
-  public GridTest(int nbCol, int nbRow) {
+  public GridTest(int nbCol, int nbRow, int[][] grid) {
     this.nbCol = nbCol;
     this.nbRow = nbRow;
     levelColumns = new int[nbCol];
-    grid = new int[nbCol][nbRow];
+    this.grid = grid;
+    
     for (int i = 0; i < levelColumns.length; i++)
-      levelColumns[i] = nbRow - 1;
-    initGrid();
+    levelColumns[i] = -1; //testIsFull
+      //levelColumns[i] = nbRow - 1;
+    //initGrid();
   }
 
   public int getNbCol() {
@@ -28,13 +30,6 @@ public class GridTest {
     return levelColumns[nbCol];
   }
 
-  private void initGrid() {
-    for (int j = 0; j < nbCol; j++) {
-      for (int i = 0; i < nbRow; i++) {
-        grid[j][i] = 0;
-      }
-    }
-  }
 
   public void showGrid() {
     for (int j = 0; j < nbRow; j++) {
@@ -46,15 +41,6 @@ public class GridTest {
 
   }
   
-  public static void showGridTest(int[][] gridTest) {
-    /*for (int j = 0; j < 7; j++) {
-      for (int i = 0; i < 6; i++) {
-        System.out.print(gridTest[i][j] + " ");
-      }
-      System.out.println();
-    }*/
-    
-  }
 
   public void addToken(int numCol, int idPlayer) {
     grid[numCol][levelColumns[numCol]--] = idPlayer;

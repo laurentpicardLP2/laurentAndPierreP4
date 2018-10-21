@@ -7,22 +7,22 @@ public class Player {
     static private int nbJoueurs;
     private String name;
     private int idPlayer;
-    Scanner input;
     private String token;
 
     public Player(int idPlayer) {
-        input = new Scanner(System.in);
+        Scanner input2 = new Scanner(System.in);
         System.out.print("entrez votre nom : [id num : " + idPlayer + "] : ");
-        name = input.nextLine();
+        name = input2.nextLine();
         this.idPlayer = idPlayer;
         token = initToken();
         Puissance4.dicoToken.put(idPlayer, token);
+        //input2.close();
     }
     
     private String initToken() {
     	Scanner input1 = new Scanner(System.in);
         System.out.print("choisissez un symbole pour votre jeton : ");
-        input1.close();
+        //input1.close();
     	return input1.nextLine();
     }
 
@@ -30,7 +30,7 @@ public class Player {
         Scanner input1 = new Scanner(System.in);
         System.out.print("entrez le nombre de joueurs : ");
         nbJoueurs = input1.nextInt();
-        input1.close();
+        //input1.close();
         return nbJoueurs;
     }
 
@@ -62,10 +62,12 @@ public class Player {
 
         grid.addToken(colNum, idPlayer);
         grid.showGrid();
-        if (isVictory(grid)) {
+        if (isVictoryByRow(grid) || isVictoryByColumn(grid) || 
+            isVictoryByDiagonal1(grid) || isVictoryByDiagonal2(grid)) {
             System.out.println("Victoire, Bravo " + name);
             return true;
-        } else if (grid.isFull()) {
+        } 
+        if (grid.isFull()) {
             System.out.println("egalite");
             return true;
         } else
@@ -73,13 +75,15 @@ public class Player {
     }
 
     private int askColumn(String msg) throws NumberFormatException {
+        Scanner input = new Scanner(System.in);
         String saisie;
         System.out.print(msg);
         saisie = input.nextLine();
+        //input.close();
         return Integer.parseInt(saisie);
     }
 
-    public boolean isVictory(Grid grid) {
+    public boolean isVictoryByRow(Grid grid){
         /* verif victory ligne */
         for (int i = 0; i < grid.getNbCol() - 3; i++)
         	for (int j = 0; j < grid.getNbRow(); j++) {
@@ -88,7 +92,10 @@ public class Player {
                     return true;
                 }
         }
+        return false;
+    }
 
+    public boolean isVictoryByColumn(Grid grid){
         /* verif victory colonne */
         for (int i = 0; i < grid.getNbCol(); i++) {
             for (int j = 0; j < grid.getNbRow() - 3; j++)
@@ -98,18 +105,24 @@ public class Player {
                 }
 
         }
+        return false;
+    }
 
+    public boolean isVictoryByDiagonal1(Grid grid) {
         /* verif victory diagonnale 1 */
-           for (int i = 0; i < grid.getNbCol() - 3; i++) {
-               for (int j = grid.getNbRow() - 1; j > 3; j--) {
-                if (grid.grid[i][j] == idPlayer && grid.grid[i + 1][j - 1] == idPlayer
-                        && grid.grid[i + 2][j - 2] == idPlayer && grid.grid[i + 3][j - 3] == idPlayer) {
-                    return true;
-                }
-            }
-        }
+        for (int i = 0; i < grid.getNbCol() - 3; i++) {
+            for (int j = grid.getNbRow() - 1; j > 3; j--) {
+             if (grid.grid[i][j] == idPlayer && grid.grid[i + 1][j - 1] == idPlayer
+                     && grid.grid[i + 2][j - 2] == idPlayer && grid.grid[i + 3][j - 3] == idPlayer) {
+                 return true;
+             }
+         }
+     }
+     return false;
+    }
 
-        /* verif victory daigonnale 2 */
+    public boolean isVictoryByDiagonal2(Grid grid) {
+        /* verif victory diagonnale 2 */
         for (int i = grid.getNbCol() - 1; i > 3; i--) {
         	for (int j = grid.getNbRow() - 1; j > 3; j--) {
             
@@ -119,11 +132,7 @@ public class Player {
                 }
             }
         }
-
         return false;
     }
-
-    // for(int i=0;i<grid.length; i++)
-    // if (grid[i]>=0) return false;
 
 }

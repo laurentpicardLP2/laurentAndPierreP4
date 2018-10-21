@@ -9,82 +9,98 @@ public class Puissance4Test {
 		testVictoireLigne();
 		testVictoireDiagonale1();
 		testVictoireDiagonale2();
-
+		testEgalite();
 	}
 
 	
     public static void testIdPlayer() {
-		PlayerTest player1 = new PlayerTest();
+		PlayerTest player1 = new PlayerTest(new String("Pierre"), 1);
         assertEquals("ok--> testIdplayer",1, player1.getIdPlayer());
     }
 
 	public static void testVictoireColonne() {
-		int i = 34;
-		int i2 = i;
-		int i22 = i2;
-		int[][] gridTest = {
-						{1, 1, 1, 1, 1, 1, 1}, 
-						{11, 21, 31, 41, 51, 61, 71}, 
-						{12, 22, 32, 42, 52, 62, 72}, 
-						{13, 23, 33, 43, 53, 63, 73}, 
-						{14, 24, 22, 44, 54, 64, 74}, 
-						{15, 25, 35, 45, 55, 65, 75}, 
+		PlayerTest player= new PlayerTest(new String("Pierre"), 1);
+		int[][] grid = {
+						{1, 1, 1, 1, 1, 1}, 
+						{11, 21, 31, 41, 51, 61}, 
+						{12, 22, 32, 42, 52, 62}, 
+						{13, 23, 33, 43, 53, 63}, 
+						{14, 24, 22, 44, 54, 64}, 
+						{15, 25, 35, 45, 55, 65},
+						{16, 26, 36, 46, 56, 66}
 						};
-		GridTest.showGridTest(gridTest);
-	    assertEquals("ok--> testVictoireColonne", PlayerTest.getResultTest(gridTest, new String("Pierre"), 1), "Victoire, Bravo Pierre");
+		GridTest gridTest = new GridTest(7, 6, grid);
+		assertEquals("ok--> testVictoireColonne", player.isVictoryByColumn(gridTest), true);
+		player.setIdPlayer(55);
+		assertEquals("ko--> pas de victoire en colonne", player.isVictoryByColumn(gridTest), false);
 	}
 
 	public static void testVictoireLigne() {
-		int[][] gridTest = {
-						{2, 11, 12, 13, 14, 15, 16}, 
-						{2, 21, 31, 41, 51, 61, 71}, 
-						{1, 22, 32, 42, 52, 62, 72}, 
-						{1, 23, 33, 43, 53, 63, 73}, 
-						{1, 24, 34, 44, 54, 64, 74}, 
-						{1, 25, 35, 45, 55, 65, 75}, 
+		PlayerTest player= new PlayerTest(new String("Laurent"), 1);
+		int[][] grid = {
+						{2, 11, 12, 13, 14, 15}, 
+						{2, 21, 31, 41, 51, 61}, 
+						{1, 22, 32, 42, 52, 62}, 
+						{1, 23, 33, 43, 53, 63}, 
+						{1, 24, 34, 44, 54, 64}, 
+						{1, 25, 35, 45, 55, 65},
+						{1, 26, 36, 46, 56, 66}
 						};
-		GridTest.showGridTest(gridTest);
-	    assertEquals("testVictoireLigne", PlayerTest.getResultTest(gridTest, new String("Laurent"), 1), "Victoire, Bravo Laurent");
+		GridTest gridTest = new GridTest(7, 6, grid);
+		//gridTest.showGrid();
+		assertEquals("ok--> victoireLigne", player.isVictoryByRow(gridTest), true);
+		player.setIdPlayer(55);
+		assertEquals("ko--> pas de victoire en Ligne", player.isVictoryByRow(gridTest), false);
 	}
 
     public static void testVictoireDiagonale1() {
-		int[][] gridTest = {
-						{2, 11, 12, 13, 14, 42, 16}, 
-						{2, 21, 31, 41, 42, 61, 71}, 
-						{4, 22, 32, 42, 52, 62, 72}, 
-						{7, 23, 42, 43, 53, 63, 73}, 
-						{1, 42, 34, 44, 54, 64, 74}, 
-						{1, 25, 35, 45, 55, 65, 75}, 
+		PlayerTest player= new PlayerTest(new String("Pierre"), 42);
+		int[][] grid = {
+						{2, 11, 12, 13, 14, 15}, 
+						{2, 21, 31, 41, 42, 61}, 
+						{4, 22, 32, 42, 52, 62}, 
+						{7, 23, 42, 43, 53, 63}, 
+						{1, 42, 34, 44, 54, 64}, 
+						{1, 25, 35, 45, 55, 65},
+						{16, 26, 36, 46, 56, 66}
 						};
-		GridTest.showGridTest(gridTest);
-		
-        assertEquals("testVictoireDiagonale1", PlayerTest.getResultTest(gridTest, new String("Pierre"), 42), "Victoire, Bravo Pierre");
+		GridTest gridTest = new GridTest(7, 6, grid);
+		assertEquals("ok--> victoire en diagonale1", player.isVictoryByDiagonal1(gridTest), true);
+		player.setIdPlayer(55);
+		assertEquals("ko--> pas de victoire en diagonale1", player.isVictoryByDiagonal1(gridTest), false);
 	}
 	
     public static void testVictoireDiagonale2() {
-		int[][] gridTest = {
-					{2, 11, 12, 13, 14, 15, 16}, 
-					{2, 21, 31, 41, 51, 61, 71}, 
-					{4, 33, 32, 42, 52, 62, 72}, 
-					{1, 23, 33, 43, 53, 63, 73}, 
-					{1, 24, 34, 33, 54, 64, 74}, 
-					{1, 25, 35, 45, 33, 65, 75}, 						
+		PlayerTest player= new PlayerTest(new String("Laurent"), 33);
+		int[][] grid = {
+					{2, 11, 12, 13, 14, 15}, 
+					{46, 21, 31, 41, 51, 61}, 
+					{4, 33, 32, 42, 52, 62}, 
+					{13, 23, 33, 43, 53, 63}, 
+					{14, 24, 34, 33, 54, 64}, 
+					{15, 25, 35, 45, 33, 65},
+					{16, 26, 36, 46, 36, 66}					
 				};
-		GridTest.showGridTest(gridTest);
-        assertEquals("testVictoireDiagonale2", PlayerTest.getResultTest(gridTest, new String("Laurent"), 33), "Victoire, Bravo Laurent");
+		GridTest gridTest = new GridTest(7, 6, grid);
+		assertEquals("ok--> victoire en diagonale2", player.isVictoryByDiagonal2(gridTest), true);
+		player.setIdPlayer(55);
+		assertEquals("ko--> pas de victoire en diagonale2", player.isVictoryByDiagonal2(gridTest), false);
 	}
 	
-    public void testEgalite() {
-		int[][] gridTest = {
-					{2, 11, 12, 13, 14, 15, 16}, 
-					{2, 21, 31, 41, 51, 61, 71}, 
-					{4, 33, 32, 42, 52, 62, 72}, 
-					{1, 23, 33, 43, 53, 63, 73}, 
-					{1, 24, 34, 33, 54, 64, 74}, 
-					{1, 25, 35, 45, 33, 65, 75}, 						
+    public static void testEgalite() {
+		PlayerTest player= new PlayerTest(new String("Laurent"), 46);
+		int[][] grid = {
+					{1, 2, 3, 4, 5, 6}, 
+					{11, 21, 31, 41, 51, 61}, 
+					{12, 22, 32, 42, 52, 62}, 
+					{13, 23, 33, 43, 53, 63}, 
+					{14, 24, 22, 44, 54, 64}, 
+					{15, 25, 35, 45, 55, 65},
+					{16, 26, 36, 46, 56, 66}				
 				};
-		GridTest.showGridTest(gridTest);
-        //assertEquals("egalite", PlayerTest.getResultTest(gridTest, new String("Laurent"), 33));
+		GridTest gridTest = new GridTest(7, 6, grid);
+		//gridTest.showGrid();
+       assertEquals("ok--> testEgalite", player.play(gridTest), true);
     }
 
 	/**
@@ -93,6 +109,14 @@ public class Puissance4Test {
 
 	public static void assertEquals(String message, double expected, double res) {
 		if (Math.abs(expected - res) < 0.0001) {
+			System.out.println("\nOK >> " + message);
+		} else {
+			throw new Error("\nKO!! >> " + message);
+		}
+	}
+
+	public static void assertEquals(String message, boolean expected, boolean res) {
+		if (expected == res) {
 			System.out.println("\nOK >> " + message);
 		} else {
 			throw new Error("\nKO!! >> " + message);
